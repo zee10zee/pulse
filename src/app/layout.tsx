@@ -34,17 +34,19 @@ export default async function RootLayout({children,}: Readonly<{children: React.
 
   const {isAuthenticated} = await auth()
  const user = await currentUser()
+  // Only create userData if all required fields exist
+  const userData = user && user.id && user.fullName && user.primaryEmailAddress?.emailAddress 
+    ? {
+        id: user.id,
+        name: user.fullName,
+        email: user.primaryEmailAddress.emailAddress,
+      }
+    : null;
 
- console.log(isAuthenticated, ' is authenticated')
-
-  const userData = {
-    id : user?.id, 
-    name : user?.fullName,
-    email : user?.primaryEmailAddress?.emailAddress
+  // Only create user if authenticated AND we have valid userData
+  if (isAuthenticated && userData) {
+    await createUserIfNotExists(userData);
   }
-
-const createNewUser = isAuthenticated && await createUserIfNotExists(userData)
-
   return (
      <ClerkProvider>
         <html
