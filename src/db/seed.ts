@@ -8,7 +8,7 @@ async function testInsert(data,table) {
   
   try {
     // Clean the data - remove hardcoded IDs if they exist
-    const cleanData = data.map(({ id, ...user }) => user);
+    const cleanData = data.map(({ id, createdAt, ...user }) => user);
     // This removes the 'id' field so the database can generate its own
     
     const multipleRows = await db.insert(table)
@@ -33,4 +33,5 @@ async function testInsert(data,table) {
 }
 
 // Run the test
+// testInsert(users, usersTable);
 testInsert(posts, postsTable);

@@ -7,10 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "nodemon": "npx next dev", 
-    "db:test": "tsx src/db/test.ts"
+    "nodemon": "npx next dev",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:seed": "npx tsx src/db/seed.ts",
+    "db:push": "npx drizzle-kit push"
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.4.0",
     "@neondatabase/serverless": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

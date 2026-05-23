@@ -1,11 +1,12 @@
-import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { integer, pgTable, serial, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { usersTable } from './users';
 
+
 export const postsTable = pgTable('posts', {
-  id: serial('id').primaryKey(),
+  id: uuid('id').primaryKey().defaultRandom(),
   title: text('title').notNull(),
   content: text('content').notNull(),
-  ownerId: integer('ownerId')
+  ownerId: text('ownerId')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at').notNull().defaultNow()

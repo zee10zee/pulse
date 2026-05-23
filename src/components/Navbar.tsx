@@ -1,5 +1,5 @@
-"use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Menubar,
   MenubarCheckboxItem,
@@ -16,10 +16,15 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar"
+import { SignOutButton, UserProfile } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { HeartPulse } from "lucide-react";
+import Link from "next/link";
+import SignOut from "../app/(auth)/SignOut";
 
 
-export default function Navbar() {
+ const Navbar = async()=> {
+  const {isAuthenticated} = await auth()
   return (
     <div className="navbar flex flex-row items-center justify-around px-4 py-2 ">
 
@@ -27,7 +32,6 @@ export default function Navbar() {
             <h1 className="text-2xl font-bold">Pulse 
                 <HeartPulse className="inline-block ml-1 text-red-500 animate-pulse" size={24} />
             </h1>
-
         </div>
         <div className="right">
             <Menubar className="w-50">
@@ -126,27 +130,35 @@ export default function Navbar() {
           </MenubarGroup>
         </MenubarContent>
       </MenubarMenu>
+        {isAuthenticated ?
       <MenubarMenu>
         <MenubarTrigger>Profiles</MenubarTrigger>
         <MenubarContent>
-          <MenubarRadioGroup value="benoit">
-            <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-            <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-          </MenubarRadioGroup>
-          <MenubarSeparator />
+        
           <MenubarGroup>
-            <MenubarItem inset>Edit...</MenubarItem>
+            <MenubarItem inset>
+             <Link href={'/profile'} >Profile</Link>
+            </MenubarItem>
           </MenubarGroup>
           <MenubarSeparator />
           <MenubarGroup>
-            <MenubarItem inset>Add Profile...</MenubarItem>
+            <MenubarItem>
+               <SignOut />
+            </MenubarItem>
           </MenubarGroup>
         </MenubarContent>
       </MenubarMenu>
+  : <MenubarMenu>
+    <MenubarTrigger>
+        <Link href={'/login'}>Sign in</Link>
+    </MenubarTrigger>
+  </MenubarMenu>
+    }
     </Menubar>
         </div>
         
     </div>
   )
 }
+
+export default Navbar

@@ -1,5 +1,5 @@
 {
-  "id": "7120b068-5aa3-40ce-b383-0b562d50122f",
+  "id": "3d4eb1e6-fbb3-4874-95f1-7d1184e4c638",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,9 +10,10 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "title": {
           "name": "title",
@@ -28,7 +29,7 @@
         },
         "ownerId": {
           "name": "ownerId",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -68,7 +69,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },

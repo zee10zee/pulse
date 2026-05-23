@@ -1,10 +1,38 @@
+
+'use server';
+
 import { eq, desc } from 'drizzle-orm';
 import { db } from '../db';
 import { postsTable, InsertPost, SelectPost } from '../schema/posts';
+import { usersTable } from '../schema/users';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+import { auth } from '@clerk/nextjs/server';
 
-export async function createPost(data: InsertPost): Promise<SelectPost> {
-  const [post] = await db.insert(postsTable).values(data).returning();
-  return post;
+export async function createPost(formData : FormData): Promise<SelectPost> {
+
+  const title = formData.get('ptitle')
+  const content = formData.get('pcontent')
+  const {userId} = await auth()
+
+  if(!title || !content){
+     throw new Error('either title or content is undefined ')
+  }
+
+  const [post] = await db.insert(postsTable).values(
+      {
+       title, 
+       content, 
+       ownerId : userId
+      }).returning();
+
+  if(!post){
+    throw new Error('insert new post failed')
+  }
+
+  revalidatePath('/home')
+  redirect('/home')
+  return post
 }
 
 export async function getUserPosts(userId: number): Promise<SelectPost[]> {
@@ -14,13 +42,54 @@ export async function getUserPosts(userId: number): Promise<SelectPost[]> {
     .orderBy(desc(postsTable.createdAt));
 }
 
-export async function updatePost(id: number, data: Partial<InsertPost>) {
-  const [post] = await db.update(postsTable)
-    .set(data)
-    .where(eq(postsTable.id, id))
-    .returning();
-  return post;
+// posts details
+
+export async function getPostsWithUsers() {
+    const result = await db
+        .select({
+            id: postsTable.id,
+            title: postsTable.title,
+            createdAt: postsTable.createdAt,
+            ownerName: usersTable.name,     // Flattened fields from users table
+            ownerEmail: usersTable.email,
+        })
+        .from(postsTable)
+        .leftJoin(usersTable, eq(postsTable.ownerId, usersTable.id))
+        .orderBy(desc(postsTable.createdAt));
+
+    return result;
 }
+
+// Fixed function name and type handling
+export const getPostDetails = async (postId: string | number) => {
+  
+  try {
+    const result = await db
+      .select({
+        id: postsTable.id,
+        title: postsTable.title,
+        content: postsTable.content,
+        createdAt: postsTable.createdAt,
+        ownerId: postsTable.ownerId,
+        ownerName: usersTable.name,
+        ownerEmail: usersTable.email,
+      })
+      .from(postsTable)
+      .leftJoin(usersTable, eq(postsTable.ownerId, usersTable.id))
+      .where(eq(postsTable.id, postId)); // Ensure same type
+    
+    console.log('Query result:', result[0]); // Debug log
+    
+    if (!result[0]) {
+      throw new Error(`Post with id ${postId} not found`);
+    }
+    
+    return result[0];
+  } catch (error) {
+    console.error('Error fetching post details:', error);
+    throw error;
+  }
+};
 
 // Add post-specific operations
 export async function getRecentPosts(limit: number = 10) {
