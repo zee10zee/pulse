@@ -35,7 +35,7 @@ export async function createPost(formData: FormData) {
   redirect('/');
 }
 
-export async function getUserPosts(userId: number): Promise<SelectPost[]> {
+export async function getUserPosts(userId: any ): Promise<SelectPost[]> {
   return await db.select()
     .from(postsTable)
     .where(eq(postsTable.ownerId, userId))
