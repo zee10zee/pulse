@@ -31,8 +31,6 @@ const users = await getAllUsers()
                <FormattedDate date={post.createdAt} />
            </div>
 
-
-
              <CardTitle className='flex flex-row gap-2 items-center'>{post.ownerName} <ThumbsUp /> </CardTitle>
            
            </div>
@@ -51,7 +49,7 @@ const users = await getAllUsers()
           </CardHeader>
         </Card>
       )) : 
-      <h1>No posts yet create one now <Link href={'/newPost'} className='bg-blue-400 p-2 rounded-md'>Create post</Link> </h1>
+      <h1>No posts yet. Create one now <Link href={'/newPost'} className='bg-blue-400 p-2 rounded-md'>Create post</Link> </h1>
       }
     </div>
     </>

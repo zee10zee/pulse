@@ -9,8 +9,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { auth } from '@clerk/nextjs/server';
 
-export async function createPost(formData : FormData): Promise<SelectPost> {
-
+export async function createPost(formData : FormData): Promise<void>{
   const title = formData.get('ptitle')
   const content = formData.get('pcontent')
   const {userId} = await auth()
@@ -32,7 +31,6 @@ export async function createPost(formData : FormData): Promise<SelectPost> {
 
   revalidatePath('/')
   redirect('/')
-  return post
 }
 
 export async function getUserPosts(userId: number): Promise<SelectPost[]> {
