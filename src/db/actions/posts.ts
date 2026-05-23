@@ -9,12 +9,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { auth } from '@clerk/nextjs/server';
 
-export async function createPost(formData : FormData): Promise<void>{
-  const title = formData.get('ptitle')
-  const content = formData.get('pcontent')
-  const {userId} = await auth()
-
-  export async function createPost(formData: FormData) {
+export async function createPost(formData: FormData) {
   const title = formData.get('ptitle') as string;
   const content = formData.get('pcontent') as string;
   const { userId } = await auth();
@@ -66,7 +61,7 @@ export async function getPostsWithUsers() {
 }
 
 // Fixed function name and type handling
-export const getPostDetails = async (postId: string | number) => {
+export const getPostDetails = async (postId: any) => {
   
   try {
     const result = await db
