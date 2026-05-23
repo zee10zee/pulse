@@ -1,4 +1,4 @@
-import { integer, pgTable, serial, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { pgTable,text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { usersTable } from './users';
 
 

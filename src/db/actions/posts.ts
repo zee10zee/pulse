@@ -14,23 +14,30 @@ export async function createPost(formData : FormData): Promise<void>{
   const content = formData.get('pcontent')
   const {userId} = await auth()
 
-  if(!title || !content){
-     throw new Error('either title or content is undefined ')
+  export async function createPost(formData: FormData) {
+  const title = formData.get('ptitle') as string;
+  const content = formData.get('pcontent') as string;
+  const { userId } = await auth();
+
+  if (!title || !content || !userId) {
+    throw new Error('Missing required fields');
   }
 
-  const [post] = await db.insert(postsTable).values(
-      {
-       title, 
-       content, 
-       ownerId : userId
-      }).returning();
+  // Type the returned value properly
+  const [post] = await db.insert(postsTable).values({
+    title: title,
+    content: content,
+    ownerId: userId,
+  }).returning() as { id: string; title: string; content: string; ownerId: string; createdAt: Date }[];
 
-  if(!post){
-    throw new Error('insert new post failed')
+  if (!post) {
+    throw new Error('Failed to create post');
   }
 
-  revalidatePath('/')
-  redirect('/')
+  // You can use post.id or other post data here if needed
+  
+  revalidatePath('/');
+  redirect('/');
 }
 
 export async function getUserPosts(userId: number): Promise<SelectPost[]> {
