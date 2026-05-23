@@ -8,10 +8,9 @@ import { MoveRight, ThumbsUp } from 'lucide-react';
 
 const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {
   const {id} = await params
-  const postId = Number(id)
 
   
-  const clickedPost = await getPostDetails(postId)
+  const clickedPost = await getPostDetails(id)
 
   return (
     <div className='w-[50%] mx-auto my-3 bg-pink-200 p-4 rounded-sm relative'>
@@ -27,9 +26,8 @@ const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {
        
            <CardDescription className='text-[16px]'>{clickedPost.content}</CardDescription>
      
-     
       <div className="backButton py-5">
-        <NavigationButton destination={'/home'} label={''} icon={<MoveRight />} />
+        <NavigationButton destination={'/'} label={''} icon={<MoveRight />} />
       </div>
     </div>
   )

@@ -30,8 +30,8 @@ export async function createPost(formData : FormData): Promise<SelectPost> {
     throw new Error('insert new post failed')
   }
 
-  revalidatePath('/home')
-  redirect('/home')
+  revalidatePath('/')
+  redirect('/')
   return post
 }
 

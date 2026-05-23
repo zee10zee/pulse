@@ -29,8 +29,10 @@ import SignOut from "../app/(auth)/SignOut";
     <div className="navbar flex flex-row items-center justify-around px-4 py-2 ">
 
         <div className="left">
-            <h1 className="text-2xl font-bold">Pulse 
+            <h1 className="text-2xl font-bold">
+                <Link href={'/'}>Pulse
                 <HeartPulse className="inline-block ml-1 text-red-500 animate-pulse" size={24} />
+                </Link> 
             </h1>
         </div>
         <div className="right">
@@ -150,7 +152,7 @@ import SignOut from "../app/(auth)/SignOut";
       </MenubarMenu>
   : <MenubarMenu>
     <MenubarTrigger>
-        <Link href={'/login'}>Sign in</Link>
+        <Link href={'/sign-in'}>Sign in</Link>
     </MenubarTrigger>
   </MenubarMenu>
     }

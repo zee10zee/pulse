@@ -27,18 +27,27 @@ const users = await getAllUsers()
         <Card key={post.id} className='flex flex-col w-full mb-5'>
           <CardHeader>
            <div className="title-owner flex flex-row items-center justify-between">
-    
             <div className="title-date">
-            <FormattedDate date={post.createdAt} />
+               <FormattedDate date={post.createdAt} />
            </div>
+
+
 
              <CardTitle className='flex flex-row gap-2 items-center'>{post.ownerName} <ThumbsUp /> </CardTitle>
            
            </div>
+             <CardTitle className='flex flex-row gap-2 items-center font-bold'>{post.title} </CardTitle>
+
+           {post.content.length > 150 ? (
             <CardDescription>
-              {post.content}
-              <Link href={`/post/${post.id}`} className='text-blue-400'>Read more</Link>
+               {post.content.substring(0, 150) }
+               <Link className='text-blue-500' href={`/post/${post.id}`}>See more</Link>
+            </CardDescription> ) : 
+            (<CardDescription>
+               {post.content}
             </CardDescription>
+            )}
+
           </CardHeader>
         </Card>
       )) : 

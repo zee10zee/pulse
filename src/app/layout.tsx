@@ -4,8 +4,9 @@ import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import "./globals.css";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import Showcase from "../components/Showcase";
+import { createUserIfNotExists } from "../db/actions/users";
 // import {themes} from '@clerk/ui/themes'
 
 
@@ -32,7 +33,18 @@ export const metadata: Metadata = {
 export default async function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
 
   const {isAuthenticated} = await auth()
-  console.log(isAuthenticated, ' is authenticated')
+ const user = await currentUser()
+
+ console.log(isAuthenticated, ' is authenticated')
+
+  const userData = {
+    id : user?.id, 
+    name : user?.fullName,
+    email : user?.primaryEmailAddress?.emailAddress
+  }
+
+const createNewUser = isAuthenticated && await createUserIfNotExists(userData)
+
   return (
      <ClerkProvider>
         <html
