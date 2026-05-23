@@ -55,7 +55,7 @@ export async function getAllUsers(): Promise<SelectUser[]> {
 /**
  * Get user by ID
  */
-export async function getUserById(id: number): Promise<SelectUser | undefined> {
+export async function getUserById(id: string): Promise<SelectUser | undefined> {
   const [user] = await db.select().from(usersTable).where(eq(usersTable.id, id));
   return user;
 }
@@ -109,7 +109,7 @@ export async function getUsersPaginated(page: number = 1, limit: number = 10): P
 /**
  * Get user with their posts (joined query)
  */
-export async function getUserWithPosts(userId: number): Promise<{
+export async function getUserWithPosts(userId: string): Promise<{
   user: SelectUser | undefined;
   posts: any[];
 }> {
@@ -140,7 +140,7 @@ export async function userExists(email: string): Promise<boolean> {
 /**
  * Get users by multiple IDs
  */
-export async function getUsersByIds(ids: number[]): Promise<SelectUser[]> {
+export async function getUsersByIds(ids: string[]): Promise<SelectUser[]> {
   if (!ids.length) return [];
   
   return await db.select()
@@ -156,7 +156,7 @@ export async function getUsersByIds(ids: number[]): Promise<SelectUser[]> {
  * Update user by ID
  */
 export async function updateUser(
-  id: number, 
+  id: string, 
   data: Partial<InsertUser>
 ): Promise<SelectUser | undefined> {
   const [updatedUser] = await db.update(usersTable)
@@ -213,7 +213,7 @@ export async function upsertUser(
 /**
  * Delete user by ID (posts will be cascade deleted due to foreign key)
  */
-export async function deleteUser(id: number): Promise<boolean> {
+export async function deleteUser(id: string): Promise<boolean> {
   const result = await db.delete(usersTable).where(eq(usersTable.id, id));
   return result.rowCount > 0;
 }
@@ -229,7 +229,7 @@ export async function deleteUserByEmail(email: string): Promise<boolean> {
 /**
  * Delete multiple users by IDs
  */
-export async function deleteManyUsers(ids: number[]): Promise<number> {
+export async function deleteManyUsers(ids: string[]): Promise<number> {
   if (!ids.length) return 0;
   
   const result = await db.delete(usersTable)
