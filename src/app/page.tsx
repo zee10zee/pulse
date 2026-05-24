@@ -31,7 +31,9 @@ const users = await getAllUsers()
                <FormattedDate date={post.createdAt} />
            </div>
 
-             <CardTitle className='flex flex-row gap-2 items-center'>{post.ownerName} <ThumbsUp /> </CardTitle>
+             <CardTitle className='flex flex-row gap-2 items-center'>
+              <Link href={`/profile/${post.ownerId}`} className='text-blue-500 font-bold'>{post.ownerName}</Link>
+               <ThumbsUp /> </CardTitle>
            
            </div>
              <CardTitle className='flex flex-row gap-2 items-center font-bold'>{post.title} </CardTitle>

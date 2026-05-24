@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { createPost } from '@/src/db/actions/posts';
 const NewPost = () => {
   return (
-    <div className=' w-screen md:w-[80%]  px-4 py-2 mx-auto'>
+    <div className=' w-screen md:w-[80%] lg:w-[50%]  px-4 py-2 mx-auto'>
       <h1 className='text-3xl font-bold'>
         Creat New Post 
       </h1>

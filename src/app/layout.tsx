@@ -22,11 +22,27 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// src/app/layout.tsx
 export const metadata: Metadata = {
   title: "Pulse",
-  description: "Have fun while being in Fun !",
+  description: "Let the world know your pulses !",
+  manifest: "/manifest.json",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
+  themeColor: "#000000",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Pulse",
+  },
+  formatDetection: {
+    telephone: false,
+  },
 };
-
 
 
 export const dynamic = 'force-dynamic';
@@ -50,6 +66,14 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+      <head>
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Pulse" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="theme-color" content="#000000" />
+      </head>
         <body className="min-h-full flex flex-col">
           <Navbar />
           {children}
