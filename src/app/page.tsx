@@ -19,7 +19,7 @@ const users = await getAllUsers()
 
     return( 
     <>
-     <div className='flex-1  justify-center px-4 py-2 min-w-screen mx-auto my-3 flex-col gap-4'>
+     <div className='flex-1  justify-center px-4 py-2 w-screen lg:w-[50%] md:w-[80%]  mx-auto my-3 flex-col gap-4'>
       <NavigationButton destination='/newPost' label='Add' icon = {<PlusIcon />} />
 
       <h1 className='text-3xl font-bold'>Feeds</h1>
