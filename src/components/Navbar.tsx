@@ -16,8 +16,8 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar"
-import { SignOutButton, UserProfile } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
+import { SignOutButton, UserAvatar, UserProfile } from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { HeartPulse } from "lucide-react";
 import Link from "next/link";
 import SignOut from "../app/(auth)/SignOut";
@@ -25,6 +25,7 @@ import SignOut from "../app/(auth)/SignOut";
 
  const Navbar = async()=> {
   const {isAuthenticated} = await auth()
+  const user = await currentUser()
   return (
     <div className="navbar flex flex-row items-center justify-around px-4 py-2 ">
 
@@ -38,37 +39,12 @@ import SignOut from "../app/(auth)/SignOut";
         <div className="right">
             <Menubar className="w-50">
       <MenubarMenu>
-        <MenubarTrigger>File</MenubarTrigger>
-        <MenubarContent>
-          <MenubarGroup>
-            <MenubarItem>
-              New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-            </MenubarItem>
-            <MenubarItem>
-              New Window <MenubarShortcut>⌘N</MenubarShortcut>
-            </MenubarItem>
-            <MenubarItem disabled>New Incognito Window</MenubarItem>
-          </MenubarGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarSub>
-              <MenubarSubTrigger>Share</MenubarSubTrigger>
-              <MenubarSubContent>
-                <MenubarGroup>
-                  <MenubarItem>Email link</MenubarItem>
-                  <MenubarItem>Messages</MenubarItem>
-                  <MenubarItem>Notes</MenubarItem>
-                </MenubarGroup>
-              </MenubarSubContent>
-            </MenubarSub>
-          </MenubarGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarItem>
-              Print... <MenubarShortcut>⌘P</MenubarShortcut>
-            </MenubarItem>
-          </MenubarGroup>
-        </MenubarContent>
+        <MenubarTrigger>
+          <Link href={'/profile'}>
+            <UserAvatar />
+          </Link>
+        </MenubarTrigger>
+      
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger>Edit</MenubarTrigger>
