@@ -4,10 +4,11 @@
 import { CardTitle } from '@/components/ui/card';
 import { useEffect, useState } from 'react';
 
-export default function FormattedDate({ date }: { date: Date }) {
+export default function FormattedDate({ date }: { date: Date}) {
   const [formattedDate, setFormattedDate] = useState('');
   
   useEffect(() => {
+    if (!date) return; // Add this safety check
     // Only format on client after hydration
     setFormattedDate(
       date.toLocaleDateString('en-US', {

@@ -1,13 +1,10 @@
-import {ClerkProvider, useAuth} from "@clerk/nextjs";
+import {ClerkProvider} from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
-import "./globals.css";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import Showcase from "../components/Showcase";
 import { createUserIfNotExists } from "../db/actions/users";
-// import {themes} from '@clerk/ui/themes'
 
 
 const geistSans = Geist({
