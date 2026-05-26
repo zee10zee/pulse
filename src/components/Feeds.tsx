@@ -6,13 +6,9 @@ import Link from 'next/link'
 import { InsertPost, SelectPost } from '../db/schema/posts'
 import Image from 'next/image'
 import { clerkClient } from '@clerk/nextjs/server'
-import { AvatarImage } from '@/components/ui/avatar'
-import { Post } from '@/lib/data/data'
 
-
-
-
-const Feeds = async ({posts} : {posts: Post[]}) => {
+//@ts-ignore
+const Feeds = async ({posts}) => {
 
 const postsWithClierUserDetails = await Promise.all(posts.map(async (post) => {
   const user = await clerkClient().then(client => client.users.getUser(post.ownerId))
