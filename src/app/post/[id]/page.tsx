@@ -26,7 +26,7 @@ const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {
            <CardDescription className='text-[16px]'>{clickedPost.content}</CardDescription>
      
       <div className="backButton py-5">
-        <NavigationButton destination={'/'} label={''} icon={<MoveRight />} />
+        <NavigationButton  label={''} icon={<MoveRight />} />
       </div>
     </div>
   )
