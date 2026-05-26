@@ -3,7 +3,7 @@ import React from 'react'
 import FormattedDate from './FormattedDate'
 import { ThumbsUp } from 'lucide-react'
 import Link from 'next/link'
-import { SelectPost } from '../db/schema/posts'
+import { InsertPost, SelectPost } from '../db/schema/posts'
 import Image from 'next/image'
 import { clerkClient } from '@clerk/nextjs/server'
 import { AvatarImage } from '@/components/ui/avatar'
@@ -11,7 +11,7 @@ import { AvatarImage } from '@/components/ui/avatar'
 
 
 
-const Feeds = async ({posts} : {posts: SelectPost[]}) => {
+const Feeds = async ({posts} : {posts: InsertPost[]}) => {
 
 const postsWithClierUserDetails = await Promise.all(posts.map(async (post) => {
   const user = await clerkClient().then(client => client.users.getUser(post.ownerId))
