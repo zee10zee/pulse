@@ -4,16 +4,15 @@ import FormattedDate from '@/src/components/FormattedDate';
 import NavigationButton from '@/src/components/NavigationButton';
 import { getPostDetails} from '@/src/db/actions/posts';
 import { MoveRight, ThumbsUp } from 'lucide-react';
+import { useDynamicRouteParams } from 'next/dist/server/app-render/dynamic-rendering';
 
 
 const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {
   const {id} = await params
-
-  
   const clickedPost = await getPostDetails(id)
 
   return (
-    <div className='w-[50%] mx-auto my-3 bg-pink-200 p-4 rounded-sm relative'>
+    <div className='w-screen mx-auto lg:w-[60%] md:w-[80%] my-3 bg-pink-200 px-4 py-2 rounded-sm relative'>
 
           <div className='flex flex-row items-center justify-between'>           
             <div className="title-date">

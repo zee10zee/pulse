@@ -1,15 +1,20 @@
 
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import {PlusIcon, ThumbsUp } from 'lucide-react'
-import Link from 'next/dist/client/link'
+import {Link, PlusIcon} from 'lucide-react'
+
 import { getRecentPosts } from '@/src/db/actions/posts'
 import { getAllUsers} from '@/src/db/actions/users'
-import FormattedDate from '@/src/components/FormattedDate'
-import NavigationButton from '@/src/components/NavigationButton'
 
-const Feeds = async () => {
+import NavigationButton from '@/src/components/NavigationButton'
+import Feeds from '../components/Feeds'
+// import { clerkClient } from '@clerk/nextjs/server'
+
+const Home = async () => {
 const recentPosts = await getRecentPosts()
 const users = await getAllUsers()
+
+
+
+
 
   const postswithUsers = recentPosts.map(post =>{
     const user = users.find(u => u.id === post.ownerId)
@@ -19,43 +24,21 @@ const users = await getAllUsers()
 
     return( 
     <>
-     <div className='flex-1  justify-center px-4 py-2 w-screen lg:w-[50%] md:w-[80%]  mx-auto my-3 flex-col gap-4'>
-      <NavigationButton destination='/newPost' label='Add' icon = {<PlusIcon />} />
+     <div className='my-3 px-4 flex-col gap-4 w-screen lg:w-[60%] md:w-[80%] mx-auto '>
 
-      <h1 className='text-3xl font-bold'>Feeds</h1>
-      {postswithUsers.length > 0 ? postswithUsers.map(post =>(
-        <Card key={post.id} className='flex flex-col w-full mb-5'>
-          <CardHeader>
-           <div className="title-owner flex flex-row items-center justify-between">
-            <div className="title-date">
-               <FormattedDate date={post.createdAt} />
-           </div>
-
-             <CardTitle className='flex flex-row gap-2 items-center'>
-              <Link href={`/profile/${post.ownerId}`} className='text-blue-500 font-bold'>{post.ownerName}</Link>
-               <ThumbsUp /> </CardTitle>
-           
-           </div>
-             <CardTitle className='flex flex-row gap-2 items-center font-bold'>{post.title} </CardTitle>
-
-           {post.content.length > 150 ? (
-            <CardDescription>
-               {post.content.substring(0, 150) }
-               <Link className='text-blue-500' href={`/post/${post.id}`}>See more</Link>
-            </CardDescription> ) : 
-            (<CardDescription>
-               {post.content}
-            </CardDescription>
-            )}
-
-          </CardHeader>
-        </Card>
-      )) : 
-      <h1>No posts yet. Create one now <Link href={'/newPost'} className='bg-blue-400 p-2 rounded-md'>Create post</Link> </h1>
-      }
+      <div className="newBtnAndTitle my-3">
+        <NavigationButton destination='/newPost' label='Add' icon = {<PlusIcon />} />
+         <h1 className='text-3xl font-bold'>Feeds</h1>
+      </div>
+      
+      {postswithUsers.length > 0 ? (
+        <Feeds posts = {postswithUsers} />
+      ) : (
+        <h1>No posts yet. Create one now <Link href={'/newPost'} className='bg-blue-400 p-2 rounded-md'>Create post</Link> </h1>
+      )}
     </div>
     </>
   )
 }
 
-export default Feeds
+export default Home
