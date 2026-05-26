@@ -6,14 +6,15 @@ import { useRouter } from 'next/navigation'
 type NavigationButtons = {
     label : string;
     icon : React.ReactNode;
+    destination? : string;
 }
 
-const NavigationButton = ({label, icon} : NavigationButtons) => {
+const NavigationButton = ({label, icon, destination} : NavigationButtons) => {
 const router = useRouter()
 
   return (
     <button 
-      onClick={() => router.back()}
+      onClick={() => destination ? router.push(destination) : router.back()}
       className="bg-green-500 text-white p-2 rounded-sm flex items-center gap-2"
     >
       {icon}

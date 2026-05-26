@@ -6,15 +6,10 @@ import { getAllUsers} from '@/src/db/actions/users'
 
 import NavigationButton from '@/src/components/NavigationButton'
 import Feeds from '../components/Feeds'
-// import { clerkClient } from '@clerk/nextjs/server'
 
 const Home = async () => {
 const recentPosts = await getRecentPosts()
 const users = await getAllUsers()
-
-
-
-
 
   const postswithUsers = recentPosts.map(post =>{
     const user = users.find(u => u.id === post.ownerId)
