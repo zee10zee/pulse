@@ -11,8 +11,7 @@ import { AvatarImage } from '@/components/ui/avatar'
 
 
 
-const Feeds = async ({posts}) => {
-const clerkUsers = await clerkClient().then
+const Feeds = async ({posts} : {posts: SelectPost[]}) => {
 
 const postsWithClierUserDetails = await Promise.all(posts.map(async (post) => {
   const user = await clerkClient().then(client => client.users.getUser(post.ownerId))
