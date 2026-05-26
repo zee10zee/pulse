@@ -5,8 +5,16 @@ export interface Post {
     title: string;
     content: string;
     createdAt: Date;
-    ownerId?: string;
+    ownerId: string;
 }
+// Define the extended post type with user details
+export type PostWithUser = Post & {
+  user: {
+    fullName: string | null;
+    imageUrl: string;
+    email: string;
+  };
+};
 
 // users interface and array
 export interface User {
