@@ -8,7 +8,7 @@ const PostOwnerProfile = async({params} : {params : Promise<{userId: string}>}) 
 
   const { userId } = await params;
   const postOwner = await (await clerkClient()).users.getUser(userId)
-   const userPosts = await getUserPosts(userId)
+  const userPosts = await getUserPosts(userId)
   
 
     return (

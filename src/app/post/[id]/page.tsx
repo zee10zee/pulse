@@ -4,7 +4,6 @@ import FormattedDate from '@/src/components/FormattedDate';
 import NavigationButton from '@/src/components/NavigationButton';
 import { getPostDetails} from '@/src/db/actions/posts';
 import { MoveRight, ThumbsUp } from 'lucide-react';
-import { useDynamicRouteParams } from 'next/dist/server/app-render/dynamic-rendering';
 
 
 const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {

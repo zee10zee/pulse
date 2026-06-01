@@ -35,7 +35,7 @@ const postsWithClierUserDetails = await Promise.all(posts.map(async (post) => {
 
              <CardTitle className='flex flex-row gap-2 items-center'>
                  <Link href={`/profile/${post.ownerId}`} className='text-blue-500 font-bold'>
-                  <Image width={40} height={100} src={post.ownerImageUrl} alt={post.ownerName}
+                  <Image width={40} height={100} src={post.ownerImageUrl} alt='user name' 
                    className='rounded-full mr-2'
                   />
                   
