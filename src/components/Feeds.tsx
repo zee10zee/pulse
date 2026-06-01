@@ -5,10 +5,10 @@ import { ThumbsUp } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { clerkClient } from '@clerk/nextjs/server'
-import { PostWithUser } from '@/lib/data/data'
+import { PostWithUser, Post } from '@/lib/data/data'
 
 //@ts-ignore
-const Feeds = async ({posts} : {posts: PostWithUser[]}) => {
+const Feeds = async ({posts} : {posts: Post[]}) => {
 
 const postsWithClierUserDetails = await Promise.all(posts.map(async (post) => {
   const user = await clerkClient().then(client => client.users.getUser(post.ownerId))
