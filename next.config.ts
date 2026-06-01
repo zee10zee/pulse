@@ -1,12 +1,6 @@
 import type { NextConfig } from "next";
+import withPWA from "@ducanh2912/next-pwa";
 
-// next.config.js
-const withPWA = require('@ducanh2912/next-pwa')({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
-});
 
 const nextConfig: NextConfig = {
    output: 'standalone',
@@ -35,9 +29,7 @@ const nextConfig: NextConfig = {
     ],
   },
    allowedDevOrigins: ['172.16.5.136', 'localhost', '127.0.0.1', '172.16.5.151'],
-    bundleAnalyzer: {
-    enabled: process.env.ANALYZE === 'true',
-  },
+   
   
   // Optimize images
   
@@ -52,4 +44,11 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPWA(nextConfig)
+// next.config.js
+export default withPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+})(nextConfig)
+

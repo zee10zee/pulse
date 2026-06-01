@@ -26,6 +26,20 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Pulse",
   description: "Let the world know your pulses !",
+  icons : {
+    icon : [
+      {
+        url: "/maskable_icon.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        url: "/maskable_icon-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      }
+    ]
+  },
   manifest: "/manifest.json",
   viewport: {
     width: "device-width",
