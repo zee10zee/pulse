@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true
     },
   images: {
+      formats: ['image/avif', 'image/webp'],
+      deviceSizes: [640, 750, 828, 1080, 1200],
+      imageSizes: [16, 32, 48, 64, 96],
     remotePatterns: [
       {
         protocol: 'https',
@@ -32,6 +35,21 @@ const nextConfig: NextConfig = {
     ],
   },
    allowedDevOrigins: ['172.16.5.136', 'localhost', '127.0.0.1', '172.16.5.151'],
+    bundleAnalyzer: {
+    enabled: process.env.ANALYZE === 'true',
+  },
+  
+  // Optimize images
+  
+  // Enable compression
+  compress: true,
+  
+  // Optimize package imports
+  modularizeImports: {
+    'lucide-react': {
+      transform: 'lucide-react/dist/esm/icons/{{member}}',
+    },
+  },
 };
 
-export default nextConfig;
+export default withPWA(nextConfig)
