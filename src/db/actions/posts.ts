@@ -9,7 +9,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { auth } from '@clerk/nextjs/server';
 
-export async function createPost(formData: FormData) {
+export async function createPost(prevState: any,formData: FormData) {
   const title = formData.get('ptitle') as string;
   const content = formData.get('pcontent') as string;
   const { userId } = await auth();
@@ -17,6 +17,8 @@ export async function createPost(formData: FormData) {
   if (!title || !content || !userId) {
     throw new Error('Missing required fields');
   }
+
+  await new Promise(resolve => setTimeout(resolve, 2000))
 
   // Type the returned value properly
   const [post] = await db.insert(postsTable).values({
@@ -30,9 +32,10 @@ export async function createPost(formData: FormData) {
   }
 
   // You can use post.id or other post data here if needed
-  
   revalidatePath('/');
   redirect('/');
+  return { message: 'Post created successfully!' }
+  
 }
 
 export async function getUserPosts(userId: any ): Promise<SelectPost[]> {
