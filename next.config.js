@@ -1,8 +1,9 @@
-import type { NextConfig } from "next";
-import withPWA from "@ducanh2912/next-pwa";
 
 
-const nextConfig: NextConfig = {
+const withPWA = require("@ducanh2912/next-pwa").default;
+
+
+const nextConfig = {
    experimental: {
     proxyClientMaxBodySize: '50mb', 
   },
