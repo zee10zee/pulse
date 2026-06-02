@@ -9,7 +9,7 @@ const AddNewPostButton = () => {
   return (
     <div className="NewPostButton">
             <button onClick={() => router.push('/newPost')}
-            className="bg-green-500 text-white p-1 rounded-sm flex flex-row">
+            className="bg-green-500 text-white p-1 rounded-sm flex flex-row" style={{marginLeft : 'auto'}}>
               <Plus /> <span>Add</span>
             </button>
       </div>

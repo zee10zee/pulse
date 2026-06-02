@@ -29,12 +29,12 @@ export const metadata: Metadata = {
   icons : {
     icon : [
       {
-        url: "/maskable_icon.png",
+        url: "/maskable_icon_x192.png",
         sizes: "192x192",
         type: "image/png",
       },
       {
-        url: "/maskable_icon-512x512.png",
+        url: "/maskable_icon_x512.png",
         sizes: "512x512",
         type: "image/png",
       }
@@ -81,7 +81,7 @@ export default async function RootLayout({
     <ClerkProvider>
       <html lang="en">
       <head>
-        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/maskable_icon_x192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Pulse" />
