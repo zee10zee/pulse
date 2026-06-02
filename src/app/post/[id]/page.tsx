@@ -1,6 +1,7 @@
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import FormattedDate from '@/src/components/FormattedDate';
+import HandleMedia from '@/src/components/HandleMedia';
 import NavigationButton from '@/src/components/NavigationButton';
 import { getPostDetails} from '@/src/db/actions/posts';
 import { MoveRight, PlusIcon, ThumbsUp } from 'lucide-react';
@@ -30,7 +31,7 @@ const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {
            <CardDescription className='text-[16px]'>{clickedPost.content}</CardDescription>
 
            {clickedPost.mediaFile && (
-             <Image width={500} height={300} src={clickedPost.mediaFile} alt='post media' className='mt-4 rounded-md' />
+            <HandleMedia mediaFile={clickedPost.mediaFile} />
            )}
      
       <div className="backButton py-5">

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { clerkClient } from '@clerk/nextjs/server'
 import { Post } from '@/lib/data/data'
+import HandleMedia from './HandleMedia'
 
 //@ts-ignore
 const Feeds = async ({posts} : {posts: Post[]}) => {
@@ -19,11 +20,16 @@ const postsWithClierUserDetails = await Promise.all(posts.map(async (post) => {
   }
 }))
 
+const IsImage = (postsWithClierUserDetails.some(post => post.mediaFile?.endsWith('.jpg') || post.mediaFile?.endsWith('.png') || post.mediaFile?.endsWith('.jpeg')))
+
+
+
+
 
   return (
-    <div >
+    <div>
      
-     {postsWithClierUserDetails.map(post => (      
+     {postsWithClierUserDetails.map(post => (    
        <Card key={post.id} className='flex flex-col w-full mb-5'>
 
           <CardHeader>
@@ -57,7 +63,9 @@ const postsWithClierUserDetails = await Promise.all(posts.map(async (post) => {
             )}
 
             {post.mediaFile && (
-              <Image width={500} height={300} src={post.mediaFile} alt='post media' className='mt-4 rounded-md' />
+
+               <HandleMedia mediaFile={post.mediaFile} />
+             
             )}
 
 

@@ -4,7 +4,11 @@ import withPWA from "@ducanh2912/next-pwa";
 
 
 const nextConfig = {
-  
+     experimental: {
+    serverActions: {
+      bodySizeLimit: '5mb',
+    },
+  },
    output: 'standalone',
     eslint: {
     // Warning: This allows production builds to successfully complete even if
