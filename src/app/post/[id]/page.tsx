@@ -4,6 +4,7 @@ import FormattedDate from '@/src/components/FormattedDate';
 import NavigationButton from '@/src/components/NavigationButton';
 import { getPostDetails} from '@/src/db/actions/posts';
 import { MoveRight, PlusIcon, ThumbsUp } from 'lucide-react';
+import Image from 'next/image';
 
 
 const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {
@@ -27,6 +28,10 @@ const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {
            <FormattedDate date={clickedPost.createdAt} />
        
            <CardDescription className='text-[16px]'>{clickedPost.content}</CardDescription>
+
+           {clickedPost.mediaFile && (
+             <Image width={500} height={300} src={clickedPost.mediaFile} alt='post media' className='mt-4 rounded-md' />
+           )}
      
       <div className="backButton py-5">
         <NavigationButton  label={''} icon={<MoveRight />} />

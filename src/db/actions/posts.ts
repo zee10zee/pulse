@@ -102,6 +102,7 @@ export const getPostDetails = async (postId: any) => {
         ownerId: postsTable.ownerId,
         ownerName: usersTable.name,
         ownerEmail: usersTable.email,
+        mediaFile : postsTable.mediaFile
       })
       .from(postsTable)
       .leftJoin(usersTable, eq(postsTable.ownerId, usersTable.id))
