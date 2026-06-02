@@ -6,6 +6,7 @@ export interface Post {
     content: string;
     createdAt: Date;
     ownerId: string;
+    mediaFile?: string; // Optional media file URL
 }
 // Define the extended post type with user details
 export type PostWithUser = Post & {

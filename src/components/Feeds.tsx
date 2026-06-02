@@ -20,7 +20,6 @@ const postsWithClierUserDetails = await Promise.all(posts.map(async (post) => {
 }))
 
 
-
   return (
     <div >
      
@@ -54,7 +53,13 @@ const postsWithClierUserDetails = await Promise.all(posts.map(async (post) => {
             (<CardDescription>
                {post.content}
             </CardDescription>
+
             )}
+
+            {post.mediaFile && (
+              <Image width={500} height={300} src={post.mediaFile} alt='post media' className='mt-4 rounded-md' />
+            )}
+
 
           </CardHeader>
         </Card>

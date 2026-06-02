@@ -17,6 +17,7 @@ const NewPost = () => {
      <form action={formAction} className='flex flex-col gap-4 min-w-[50%] mx-auto my-4'>
         <Input placeholder='Provide a Title' name="ptitle" className='border border-[#555]' />
         <Textarea placeholder='Provide a description' name="pcontent" className='border border-[#555]' />
+        <Input type="file" name="mediaFile" className='border border-[#555]' />
         <Button type="submit" className='bg-green-800 w-fit ' disabled={isPending}>
           {isPending ? 'Submitting...' : 'Submit'}
         </Button>

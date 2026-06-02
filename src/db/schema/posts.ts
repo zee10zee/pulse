@@ -9,7 +9,8 @@ export const postsTable = pgTable('posts', {
   ownerId: text('ownerId')
     .notNull()
     .references(() => usersTable.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at').notNull().defaultNow()
+  createdAt: timestamp('created_at').notNull().defaultNow(), 
+    mediaFile : text('mediaFile') 
 });
 
 
