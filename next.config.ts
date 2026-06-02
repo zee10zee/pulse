@@ -3,6 +3,12 @@ import withPWA from "@ducanh2912/next-pwa";
 
 
 const nextConfig: NextConfig = {
+   experimental: {
+    proxyClientMaxBodySize: '50mb', 
+  },
+  serverActions: {
+    bodySizeLimit: '35mb', 
+  },
    output: 'standalone',
     eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -42,6 +48,7 @@ const nextConfig: NextConfig = {
       transform: 'lucide-react/dist/esm/icons/{{member}}',
     },
   },
+  
 };
 
 // next.config.js
