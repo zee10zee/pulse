@@ -5,7 +5,7 @@ import { ThumbsUp } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { clerkClient } from '@clerk/nextjs/server'
-import { PostWithUser, Post } from '@/lib/data/data'
+import { Post } from '@/lib/data/data'
 
 //@ts-ignore
 const Feeds = async ({posts} : {posts: Post[]}) => {
