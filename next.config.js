@@ -5,10 +5,10 @@ import withPWA from "@ducanh2912/next-pwa";
 
 const nextConfig = {
    experimental: {
-    proxyClientMaxBodySize: '50mb', 
+    proxyClientMaxBodySize: '100mb', 
   },
   serverActions: {
-    bodySizeLimit: '35mb', 
+    bodySizeLimit: '100mb', 
   },
    output: 'standalone',
     eslint: {
