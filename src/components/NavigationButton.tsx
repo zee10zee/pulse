@@ -15,7 +15,7 @@ const router = useRouter()
   return (
     <button 
       onClick={() => destination ? router.push(destination) : router.back()}
-      className="bg-green-500 text-white p-2 rounded-sm flex items-center gap-2"
+      className="bg-green-500 text-white p-2 rounded-sm flex items-center gap-2 ml-auto"
     >
       {icon}
       <span>{label}</span>

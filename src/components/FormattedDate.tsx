@@ -22,5 +22,5 @@ export default function FormattedDate({ date }: { date: Date}) {
   // Show nothing during SSR to avoid mismatch
   if (!formattedDate) return <CardTitle className='text-sm font-thin'>Loading...</CardTitle>;
   
-  return <CardTitle className='text-sm font-thin'>{formattedDate}</CardTitle>;
+  return <CardTitle className='text-sm font-thin bg-gray-100 px-2 w-fit rounded'>{formattedDate}</CardTitle>;
 }

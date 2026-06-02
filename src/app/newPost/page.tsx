@@ -9,7 +9,7 @@ const NewPost = () => {
 
   const [state, formAction, isPending] = useActionState(createPost, null);
   return (
-    <div className=' w-screen md:w-[80%] lg:w-[50%]  px-4 py-2 mx-auto'>
+    <div className='w-screen md:w-[80%] lg:w-[50%]  px-4 py-2 mx-auto mt-15'>
       <h1 className='text-3xl font-bold'>
         Creat New Post 
       </h1>

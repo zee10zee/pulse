@@ -12,7 +12,7 @@ const PostOwnerProfile = async({params} : {params : Promise<{userId: string}>}) 
   
 
     return (
-      <div className='px-4 my-10 w-screen  md:w-[80%] lg:w-[60%] mx-auto'>
+      <div className='px-4 my-20 w-screen  md:w-[80%] lg:w-[60%] mx-auto'>
 
           <div className='flex flex-col items-center gap-4 mb-5'>
             <Avatar className='w-24 h-24 mb-4'>

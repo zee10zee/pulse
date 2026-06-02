@@ -3,7 +3,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/ca
 import FormattedDate from '@/src/components/FormattedDate';
 import NavigationButton from '@/src/components/NavigationButton';
 import { getPostDetails} from '@/src/db/actions/posts';
-import { MoveRight, ThumbsUp } from 'lucide-react';
+import { MoveRight, PlusIcon, ThumbsUp } from 'lucide-react';
 
 
 const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {
@@ -11,16 +11,20 @@ const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {
   const clickedPost = await getPostDetails(id)
 
   return (
-    <div className='w-screen mx-auto lg:w-[60%] md:w-[80%] my-3 bg-pink-200 px-4 py-2 rounded-sm relative'>
+    <div className="w-screen md:w-[80%] lg:w-[60%]  px-4 py-2 mx-auto mt-15 my-20">
+      <div className=' border border-pink-200 rounded-sm relative p-5'>
 
           <div className='flex flex-row items-center justify-between'>           
             <div className="title-date">
-             <CardTitle>{clickedPost.title}</CardTitle>
-             <FormattedDate date={clickedPost.createdAt} />
+             <CardTitle className='font-bold'>{clickedPost.title}</CardTitle>
            </div>
 
-             <CardTitle className='flex flex-row gap-2 items-center'>{clickedPost.ownerName} <ThumbsUp /> </CardTitle>
+             <CardTitle className='flex flex-row gap-2 items-center'>
+              <NavigationButton destination={`/profile/${clickedPost.ownerId}`} label={`${clickedPost.ownerName}`} icon = {<ThumbsUp />} />  
+              </CardTitle>
            </div>
+
+           <FormattedDate date={clickedPost.createdAt} />
        
            <CardDescription className='text-[16px]'>{clickedPost.content}</CardDescription>
      
@@ -28,6 +32,8 @@ const PostDetails = async({params} : {params: Promise<{ id: string }>; }) => {
         <NavigationButton  label={''} icon={<MoveRight />} />
       </div>
     </div>
+    </div>
+    
   )
 }
 

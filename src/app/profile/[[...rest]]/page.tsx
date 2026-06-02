@@ -6,7 +6,7 @@ const Profile = async() => {
   const user = await currentUser();
 
   return (
-    <div className='min-w-[50%] mx-auto'>
+    <div className='min-w-[50%] mx-auto mt-15'>
      <UserProfile />
     </div>
   )

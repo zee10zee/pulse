@@ -32,7 +32,7 @@ const usersList = await users.getUserList()
     <>
      <div className='my-3 px-4 flex-col gap-4 w-screen lg:w-[60%] md:w-[80%] mx-auto '>
 
-      <div className="newBtnAndTitle my-3">
+      <div className="newBtnAndTitle my-12">
         <NavigationButton destination='/newPost' label='Add' icon = {<PlusIcon />} />
          <h1 className='text-3xl font-bold'>Feeds</h1>
       </div>

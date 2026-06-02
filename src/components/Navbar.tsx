@@ -27,7 +27,7 @@ import SignOut from "../app/(auth)/SignOut";
   const {isAuthenticated} = await auth()
   const user = await currentUser()
   return (
-    <div className="navbar flex flex-row items-center justify-around px-4 py-2 ">
+    <div className="navbar flex flex-row items-center justify-around px-4 py-2 fixed top-0 left-0 right-0 bg-white shadow-md z-10">
 
         <div className="left">
             <h1 className="text-2xl font-bold">
