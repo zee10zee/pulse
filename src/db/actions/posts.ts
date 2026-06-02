@@ -8,8 +8,7 @@ import { usersTable } from '../schema/users';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { auth } from '@clerk/nextjs/server';
-import path from 'path';
-import { mkdir, writeFile } from 'fs/promises';
+import {put} from '@vercel/blob'
 
 export async function createPost(prevState: any,formData: FormData) {
   const title = formData.get('ptitle') as string;
@@ -25,31 +24,16 @@ export async function createPost(prevState: any,formData: FormData) {
   await new Promise(resolve => setTimeout(resolve, 2000))
 
 
-  // Create unique filename
-    const timestamp = Date.now();
-    const safeName = file.name.replaceAll(' ', '_');
-    const filename = `${timestamp}-${safeName}`;
-    
-    // Create uploads directory if it doesn't exist
-    const uploadDir = path.join(process.cwd(), 'public/uploads');
-    await mkdir(uploadDir, { recursive: true });
-    
-    // Save file to disk
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const filePath = path.join(uploadDir, filename);
-    await writeFile(filePath, buffer);
-
-    console.log(buffer, ' the buffer file ', filePath, ' the path file')
-
-    // Step 3: Store path in DB
-const imagePath = `/uploads/${filename}`;
+   const blob = await put(file.name, file, {
+      access: 'public',
+      token: process.env.POST_IMAGE_BLOB_READ_WRITE_TOKEN,
+    });
 
   // Type the returned value properly
   const [post] = await db.insert(postsTable).values({
     title: title,
     content: content,
-    mediaFile : imagePath,
+    mediaFile : blob.url,
     ownerId: userId,
   }).returning() as { id: string; title: string; content: string; ownerId: string; createdAt: Date }[];
 

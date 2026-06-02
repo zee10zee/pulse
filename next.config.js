@@ -4,12 +4,7 @@ import withPWA from "@ducanh2912/next-pwa";
 
 
 const nextConfig = {
-   experimental: {
-    proxyClientMaxBodySize: '100mb', 
-  },
-  serverActions: {
-    bodySizeLimit: '100mb', 
-  },
+  
    output: 'standalone',
     eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -30,6 +25,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname : "img.pixels.com",
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname : "1oailegjsohwrkhq.public.blob.vercel-storage.com",
         port: '',
         pathname: '/**',
       },
